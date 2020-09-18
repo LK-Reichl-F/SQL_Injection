@@ -17,6 +17,12 @@ app.get('/anmelden', async (req, res, next) => {
     next();
 });
 
+app.get('/abspeichern', async (req, res, next) => {
+    res.json(await informationAbspeichern(req.query.name, req.query.passwort, req.query.key, req.query.value));
+    next();
+});
+
+
 // Datenbank-Funktionen:
 
 const pool = new Pool({
@@ -48,6 +54,28 @@ async function benutzerAnmelden(name, passwort) {
     let ergebnis;
     try {
         const queryText = `select from benutzer where name='${name}' and passwort='${passwort}'`;
+        const result = await client.query(queryText);
+        console.log(result);
+        if (result.rowCount===0) {
+            ergebnis = { ergebnis: "Passwort ungültig" };
+        } else {
+            ergebnis = { ergebnis: "ok" };
+        }
+    } catch (e) {
+        console.log(e.detail);
+        ergebnis = { ergebnis: e.detail };
+    } finally {
+        client.release();
+    }
+    return ergebnis;
+}
+
+async function informationAbspeichern(name, passwort, key, value) {
+    const client = await pool.connect();
+    let ergebnis;
+    try {
+        const queryText = `insert into informationen (benutzerid, schluessel, wert) 
+        select id, '${key}', '${value}' from benutzer where name='${name}' and passwort='${passwort}'`;
         const result = await client.query(queryText);
         console.log(result);
         if (result.rowCount===0) {

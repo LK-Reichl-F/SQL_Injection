@@ -33,3 +33,24 @@ async function anmelden() {
     }
     document.getElementById("anmeldenErgebnis").innerText = ergebnis;
 }
+
+async function abspeichern() {
+    const name = document.getElementById("anmeldenName").value;
+    const passwort = document.getElementById("anmeldenPasswort").value;
+    const key = document.getElementById('speichernKey').value;
+    const value = document.getElementById('speichernValue').value;
+    const url = new URL("http://10.17.1.130:3001/abspeichern");
+    url.searchParams.append("name", name);
+    url.searchParams.append("passwort", passwort);
+    url.searchParams.append("key", key);
+    url.searchParams.append("value", value);
+    let ergebnis;
+    try {
+        const versprechen = await fetch(url);
+        const json = await versprechen.json();
+        ergebnis = JSON.stringify(json);
+    } catch (ausnahme) {
+        ergebnis = ausnahme;
+    }
+    document.getElementById("abspeichernErgebnis").innerText = ergebnis;
+}
