@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>SQL Injection</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <h1>SQL Injection</h1>
+    <h2>Warnung:</h2>
+    <p>Hier keine persönlichen Daten und auch keine echten Passwörter eingeben!</p>
+    <p>Diese Seite dient zur Demonstration von Sicherheitslücken.</p>
+    <hr>
+    <h2>Anlegen eines/r neuen Benutzer*in</h2>
+    <label>Name <input type="text" id="anlegenName"></label><br>
+    <label>Passwort <input type="password" id="anlegenPasswort"></label><br>
+    <button onclick="anlegen();">neu anlegen</button><br>
+    <label>Ergebnis: <span id="anlegenErgebnis"></span></label>
+    <hr>
+    <h2>Anmeldung eines/r breits angelegten Benutzers*in</h2>
+    <label>Name <input type="text"></label><br>
+    <label>Passwort <input type="password"></label><br>
+    <button onclick="anmelden();">anmelden</button>
+    <hr>
+    <h2>Information abspeichern</h2>
+    <label>Suchbegriff <input type="text"></label><br>
+    <label>Information <input type="text"></label><br>
+    <button onclick="abspeichern();">abspeichern</button>
+    <hr>
+    <h2>Information abfragen</h2>
+    <label>Suchbegriff <input type="text"></label><br>
+    <button onclick="abfragen();">abfrage</button><br>
+    <label>Ergebnis <div></div></label>
+</body>
+
+</html>
