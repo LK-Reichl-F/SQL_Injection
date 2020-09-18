@@ -28,10 +28,10 @@ async function benutzerAnlegen(name, passwort) {
     try {
         const queryText = `insert into benutzer (name, passwort) values ('${name}', '${passwort}')`;
         await client.query(queryText);
-        ergebnis = {ergebnis: "ok"};
+        ergebnis = { ergebnis: "ok" };
     } catch (e) {
         console.log(e.detail);
-        ergebnis = {ergebnis: e.detail};
+        ergebnis = { ergebnis: e.detail };
     } finally {
         client.release();
     }
