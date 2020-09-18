@@ -8,6 +8,7 @@ async function anlegen() {
     url.searchParams.append("passwort", passwort);
     let ergebnis;
     try {
+        console.log(url.toString());
         const versprechen = await fetch(url);
         const json = await versprechen.json();
         ergebnis = JSON.stringify(json);
@@ -25,6 +26,7 @@ async function anmelden() {
     url.searchParams.append("passwort", passwort);
     let ergebnis;
     try {
+        console.log(url.toString());
         const versprechen = await fetch(url);
         const json = await versprechen.json();
         ergebnis = JSON.stringify(json);
@@ -46,6 +48,7 @@ async function abspeichern() {
     url.searchParams.append("value", value);
     let ergebnis;
     try {
+        console.log(url.toString());
         const versprechen = await fetch(url);
         const json = await versprechen.json();
         ergebnis = JSON.stringify(json);
@@ -53,4 +56,24 @@ async function abspeichern() {
         ergebnis = ausnahme;
     }
     document.getElementById("abspeichernErgebnis").innerText = ergebnis;
+}
+
+async function abfragen() {
+    const name = document.getElementById("anmeldenName").value;
+    const passwort = document.getElementById("anmeldenPasswort").value;
+    const key = document.getElementById('abfrageKey').value;
+    const url = new URL("http://10.17.1.130:3001/abfragen");
+    url.searchParams.append("name", name);
+    url.searchParams.append("passwort", passwort);
+    url.searchParams.append("key", key);
+    let ergebnis;
+    try {
+        console.log(url.toString());
+        const versprechen = await fetch(url);
+        const json = await versprechen.json();
+        ergebnis = JSON.stringify(json);
+    } catch (ausnahme) {
+        ergebnis = ausnahme;
+    }
+    document.getElementById("abfragenErgebnis").innerText = ergebnis;
 }

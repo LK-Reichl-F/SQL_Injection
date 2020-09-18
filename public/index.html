@@ -24,7 +24,7 @@
     <hr>
     <h2>Anmeldung eines/r breits angelegten Benutzers*in</h2>
     <label>Name <input type="text" id="anmeldenName"></label><br>
-    <label>Passwort <input type="password" id="anmeldenPasswort"></label><br>
+    <label>Passwort <input type="text" id="anmeldenPasswort"></label><br>
     <button onclick="anmelden();">anmelden</button><br>
     <label>Ergebnis: <span id="anmeldenErgebnis"></span></label>
     <hr>
@@ -35,9 +35,9 @@
     <label>Ergebnis: <span id="abspeichernErgebnis"></span></label>
     <hr>
     <h2>Information abfragen</h2>
-    <label>Suchbegriff <input type="text"></label><br>
-    <button onclick="abfragen();">abfrage</button><br>
-    <label>Ergebnis <div></div></label>
+    <label>Suchbegriff <input type="text" id="abfrageKey"></label><br>
+    <button onclick="abfragen();">abfragen</button><br>
+    <label>Ergebnis <div id="abfragenErgebnis"></div></label>
 </body>
 
 </html>

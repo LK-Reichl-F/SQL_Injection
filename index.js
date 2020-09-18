@@ -22,6 +22,11 @@ app.get('/abspeichern', async (req, res, next) => {
     next();
 });
 
+app.get('/abfragen', async (req, res, next) => {
+    res.json(await informationAbfragen(req.query.name, req.query.passwort, req.query.key));
+    next();
+});
+
 
 // Datenbank-Funktionen:
 
@@ -82,6 +87,27 @@ async function informationAbspeichern(name, passwort, key, value) {
             ergebnis = { ergebnis: "Passwort ungültig" };
         } else {
             ergebnis = { ergebnis: "ok" };
+        }
+    } catch (e) {
+        console.log(e.detail);
+        ergebnis = { ergebnis: e.detail };
+    } finally {
+        client.release();
+    }
+    return ergebnis;
+}
+
+async function informationAbfragen(name, passwort, key) {
+    const client = await pool.connect();
+    let ergebnis;
+    try {
+        const queryText = `select wert from benutzer, informationen where schluessel='${key}' and name='${name}' and passwort='${passwort}'`;
+        const result = await client.query(queryText);
+        console.log(result);
+        if (result.rowCount===0) {
+            ergebnis = { ergebnis: "Keine Daten gefunden" };
+        } else {
+            ergebnis = result.rows;
         }
     } catch (e) {
         console.log(e.detail);
