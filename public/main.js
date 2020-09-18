@@ -17,3 +17,19 @@ async function anlegen() {
     document.getElementById("anlegenErgebnis").innerText = ergebnis;
 }
 
+async function anmelden() {
+    const name = document.getElementById("anmeldenName").value;
+    const passwort = document.getElementById("anmeldenPasswort").value;
+    const url = new URL("http://10.17.1.130:3001/anmelden");
+    url.searchParams.append("name", name);
+    url.searchParams.append("passwort", passwort);
+    let ergebnis;
+    try {
+        const versprechen = await fetch(url);
+        const json = await versprechen.json();
+        ergebnis = JSON.stringify(json);
+    } catch (ausnahme) {
+        ergebnis = ausnahme;
+    }
+    document.getElementById("anmeldenErgebnis").innerText = ergebnis;
+}

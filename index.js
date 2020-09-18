@@ -12,6 +12,11 @@ app.get('/anlegen', async (req, res, next) => {
     next();
 });
 
+app.get('/anmelden', async (req, res, next) => {
+    res.json(await benutzerAnmelden(req.query.name, req.query.passwort));
+    next();
+});
+
 // Datenbank-Funktionen:
 
 const pool = new Pool({
@@ -29,6 +34,27 @@ async function benutzerAnlegen(name, passwort) {
         const queryText = `insert into benutzer (name, passwort) values ('${name}', '${passwort}')`;
         await client.query(queryText);
         ergebnis = { ergebnis: "ok" };
+    } catch (e) {
+        console.log(e.detail);
+        ergebnis = { ergebnis: e.detail };
+    } finally {
+        client.release();
+    }
+    return ergebnis;
+}
+
+async function benutzerAnmelden(name, passwort) {
+    const client = await pool.connect();
+    let ergebnis;
+    try {
+        const queryText = `select from benutzer where name='${name}' and passwort='${passwort}'`;
+        const result = await client.query(queryText);
+        console.log(result);
+        if (result.rowCount===0) {
+            ergebnis = { ergebnis: "Passwort ungültig" };
+        } else {
+            ergebnis = { ergebnis: "ok" };
+        }
     } catch (e) {
         console.log(e.detail);
         ergebnis = { ergebnis: e.detail };
