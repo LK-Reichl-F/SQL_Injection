@@ -6,9 +6,10 @@ async function anlegen() {
     const url = new URL("http://10.17.1.130:3001/anlegen");
     url.searchParams.append("name", name);
     url.searchParams.append("passwort", passwort);
+    const urlString = url.toString();
+    document.getElementById("anlegenAufruf").innerHTML = `<a href="${urlString}">${urlString}</a>`
     let ergebnis;
     try {
-        console.log(url.toString());
         const versprechen = await fetch(url);
         const json = await versprechen.json();
         ergebnis = JSON.stringify(json);
@@ -24,9 +25,10 @@ async function anmelden() {
     const url = new URL("http://10.17.1.130:3001/anmelden");
     url.searchParams.append("name", name);
     url.searchParams.append("passwort", passwort);
+    const urlString = url.toString();
+    document.getElementById("anmeldenAufruf").innerHTML = `<a href="${urlString}">${urlString}</a>`
     let ergebnis;
     try {
-        console.log(url.toString());
         const versprechen = await fetch(url);
         const json = await versprechen.json();
         ergebnis = JSON.stringify(json);
@@ -46,9 +48,10 @@ async function abspeichern() {
     url.searchParams.append("passwort", passwort);
     url.searchParams.append("key", key);
     url.searchParams.append("value", value);
+    const urlString = url.toString();
+    document.getElementById("abspeichernAufruf").innerHTML = `<a href="${urlString}">${urlString}</a>`
     let ergebnis;
     try {
-        console.log(url.toString());
         const versprechen = await fetch(url);
         const json = await versprechen.json();
         ergebnis = JSON.stringify(json);
@@ -66,6 +69,8 @@ async function abfragen() {
     url.searchParams.append("name", name);
     url.searchParams.append("passwort", passwort);
     url.searchParams.append("key", key);
+    const urlString = url.toString();
+    document.getElementById("abfragenAufruf").innerHTML = `<a href="${urlString}">${urlString}</a>`
     let ergebnis;
     try {
         console.log(url.toString());
