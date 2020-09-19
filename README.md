@@ -42,7 +42,7 @@ Wenn man nachstehenden Text in das Feld `Passwort` eingibt, wird man als Benutze
 
 #### Erklärung
 
-Im Programm wird die Datenbankabfrage wie folgt erstellt
+Im JavaScript-Programm wird die Datenbankabfrage wie folgt erstellt
 
 ```javascript
 `select from benutzer where name='${name}' and passwort='${passwort}'`
@@ -58,3 +58,33 @@ select from benutzer where name='beliebigen Namen' and passwort='' or name='Hugo
 und wird als Benutzer `Hugo` angemeldet.
 
 ### Abfrage beliebiger Informationen
+
+Zunächst wieder die Zusammenstellung der SQL-Anweisung für die Datenbank:
+
+```javascript
+`select wert from benutzer, informationen where schluessel='${key}' and name='${name}' and passwort='${passwort}'`
+```
+
+Auch hier kann man am einfachsten angreifen, in dem man für `${passwort}` Datenbank-Code schreibt, der die 
+voherigen Bedingungen bedeutungslos macht und statt dessen eigene Bedingungen setzt. Zum Beispiel:
+
+```sql
+' or schluessel='Geheimnis' and name='Irene
+```
+
+### Abfrage aller Benutzernamen und Passwörter
+
+Man kann nicht nur aus der ursprünglichen Tabelle Daten abfragen, sondern auch diese Abfrage
+mit einer Abfrage aus einer anderen Tabelle kombinieren, so dass man beispielsweise alle Benutzernamen
+und Passwörter ansehen kann:
+
+```sql
+' union select name || ': ' || passwort from benutzer where 'x'='x
+```
+## Nachwort
+
+Natürlich lassen sich diese Angriffe relativ einfach verhindern, zum Beispiel durch Verwendung von
+sogenannten "Prepared Statements".
+
+Es braucht also nur eine\*n aufmerksame\*n Programmier\*in um diese Fehler zu vermeiden. Aber Menschen
+machen Fehler…
