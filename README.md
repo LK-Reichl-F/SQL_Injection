@@ -34,7 +34,8 @@ die an den Datenbankserver geschickt wird.
 
 ### Anmeldung ohne Kenntnis des Passworts
 
-Wenn man nachstehenden Text in das Feld `Passwort` eingibt, wird man als Benutzer `Hugo` angemeldet, ohne sein Passwort kennen.
+Wenn man nachstehenden Text in das Feld `Passwort` eingibt, wird man als Benutzer `Hugo` angemeldet, ohne sein Passwort 
+zu kennen.
 
 ```sql
 ' or name='Hugo
@@ -72,13 +73,15 @@ voherigen Bedingungen bedeutungslos macht und statt dessen eigene Bedingungen se
 ' or schluessel='Geheimnis' and name='Irene
 ```
 
+Wieder als Passwort bei der Anmeldung eingeben.
+
 ### Abfrage aller Benutzernamen und Passwörter
 
 Man kann nicht nur aus der ursprünglichen Tabelle Daten abfragen, sondern auch diese Abfrage
 mit einer Abfrage aus einer anderen Tabelle kombinieren, so dass man beispielsweise alle Benutzernamen
 und Passwörter ansehen kann.
 
-Wieder als Passwort eingeben:
+Wieder bei der Anmeldung als Passwort eingeben:
 
 ```sql
 ' union select name || ': ' || passwort from benutzer where 'x'='x
