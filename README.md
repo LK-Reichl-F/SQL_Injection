@@ -76,7 +76,9 @@ voherigen Bedingungen bedeutungslos macht und statt dessen eigene Bedingungen se
 
 Man kann nicht nur aus der ursprünglichen Tabelle Daten abfragen, sondern auch diese Abfrage
 mit einer Abfrage aus einer anderen Tabelle kombinieren, so dass man beispielsweise alle Benutzernamen
-und Passwörter ansehen kann:
+und Passwörter ansehen kann.
+
+Wieder als Passwort eingeben:
 
 ```sql
 ' union select name || ': ' || passwort from benutzer where 'x'='x
